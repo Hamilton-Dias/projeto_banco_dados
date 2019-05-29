@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_25_131301) do
+ActiveRecord::Schema.define(version: 2019_05_29_002056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 2019_05_25_131301) do
     t.string "situacao", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "empresa_portfolio_id"
+    t.index ["empresa_portfolio_id"], name: "index_meta_on_empresa_portfolio_id"
   end
 
   create_table "nota_orcamentos", force: :cascade do |t|
@@ -94,6 +96,7 @@ ActiveRecord::Schema.define(version: 2019_05_25_131301) do
   end
 
   add_foreign_key "empresa_portfolios", "possuis"
+  add_foreign_key "meta", "empresa_portfolios"
   add_foreign_key "nota_orcamentos", "produtos"
   add_foreign_key "orcamentos", "nota_orcamentos"
   add_foreign_key "possuis", "produtos"
